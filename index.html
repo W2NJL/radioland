@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RadioLand 2.0 — Signal-Accurate Radio Discovery for iOS and Android</title>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://w2njl.github.io/radioland/">
+  <meta property="og:title" content="RadioLand 2.0 — Radio Near Me">
+  <meta property="og:description" content="Terrain-based FM, AM and weather radio signal prediction for iOS and Android. Coverage maps, interference analysis and sports affiliate lookups powered by FCC license data.">
+  <meta property="og:image" content="https://w2njl.github.io/radioland/assets/og.png">
+  <meta property="og:site_name" content="RadioLand">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@W2NJL">
+  <meta name="twitter:title" content="RadioLand 2.0 — Radio Near Me">
+  <meta name="twitter:description" content="Terrain-based FM, AM and weather radio signal prediction. Coverage maps, interference analysis and sports affiliate lookups for iOS and Android.">
+  <meta name="twitter:image" content="https://w2njl.github.io/radioland/assets/og.png">
+
+  <!-- Apple Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=1597896359">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #B5421A;
+      --navy:   #1B2A4A;
+      --ink:    #2C2B28;
+      --muted:  #5C5B57;
+      --rule:   #DDD9D0;
+      --bg:     #FAF9F6;
+      --card:   #FFFFFF;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    a { color: var(--red); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Masthead ── */
+    .masthead {
+      border-bottom: 3px solid var(--navy);
+      padding: 18px 24px 14px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .masthead-name {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--navy);
+    }
+    .masthead-name span { color: var(--red); }
+    .masthead-tag {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--navy);
+      color: #EEEDEA;
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+    .hero-kicker {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      line-height: 1.15;
+      font-weight: normal;
+      max-width: 760px;
+      margin: 0 auto 16px;
+      color: #EEEDEA;
+    }
+    .hero-deck {
+      font-size: 18px;
+      color: #A09F9A;
+      max-width: 640px;
+      margin: 0 auto 36px;
+      line-height: 1.5;
+    }
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #FFFFFF;
+      color: var(--navy);
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .badge:hover { background: #F0EEE8; text-decoration: none; }
+    .badge svg { flex-shrink: 0; }
+    .badge-sub { font-size: 10px; font-weight: 400; display: block; opacity: 0.7; }
+
+    /* ── Body copy ── */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+    .content h2 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+    .content p {
+      margin-bottom: 20px;
+      font-size: 17px;
+    }
+    .content p:last-child { margin-bottom: 0; }
+
+    /* ── Feature grid ── */
+    .features {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 40px 0;
+      margin: 40px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px 40px;
+    }
+    .feature h3 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .feature p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* ── Screenshots ── */
+    .gallery-section {
+      background: var(--navy);
+      padding: 56px 24px;
+    }
+    .gallery-section h2 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .gallery figure {
+      margin: 0;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: var(--radius);
+      display: block;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .gallery figcaption {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      color: #706F6A;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 32px 24px;
+      text-align: center;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 480px) {
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+      .masthead-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="masthead-name">Radio<span>Land</span> 2.0</div>
+    <div class="masthead-tag">iOS &amp; Android</div>
+  </header>
+
+  <section class="hero">
+    <p class="hero-kicker">Signal Analysis &amp; Station Discovery</p>
+    <h1>Which stations can you actually receive, and why?</h1>
+    <p class="hero-deck">RadioLand 2.0 applies Longley-Rice terrain propagation modeling to FM, AM and NOAA Weather Radio stations across North America, Bermuda and the Caribbean — and shows you the math.</p>
+    <div class="badge-row">
+      <a class="badge" href="https://apps.apple.com/us/app/radioland-2-0-radio-near-me/id1597896359" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        <span>
+          <span class="badge-sub">Download on the</span>
+          App Store
+        </span>
+      </a>
+      <a class="badge" href="https://play.google.com/store/apps/details?id=com.w2njl.radioland&hl=en_US" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/>
+        </svg>
+        <span>
+          <span class="badge-sub">Get it on</span>
+          Google Play
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <main class="content">
+    <h2>Overview</h2>
+
+    <p>RadioLand 2.0 is a radio station discovery and signal analysis application for iOS and Android. The app draws on FCC license data and applies the Longley-Rice irregular terrain model — the same methodology used by engineers and regulators for decades — to calculate expected FM, AM and NOAA Weather Radio reception for a given location. Coverage is available across the United States, Canada, Mexico, Bermuda and the Caribbean.</p>
+
+    <p>Rather than displaying static service contours, the app calculates signal propagation over actual terrain and displays results on an interactive map, color-coded from poor to excellent. The list view shows each station's predicted field strength in dBµV/m, distance and bearing from the user's position, and relevant metadata including format, slogan, HD Radio subchannel formats and network affiliations.</p>
+
+    <div class="features">
+      <div class="feature">
+        <h3>Coverage Maps — FM</h3>
+        <p>FCC protected service contour and 40 dBµV/m field strength contour overlays, rendered over terrain. Signal strength is color-coded across the coverage footprint.</p>
+      </div>
+      <div class="feature">
+        <h3>Coverage Maps — AM</h3>
+        <p>Separate day and nighttime coverage maps account for groundwave propagation and skywave skip. A DX mode extends the nighttime skywave calculation to long-distance reception.</p>
+      </div>
+      <div class="feature">
+        <h3>Terrain Profile</h3>
+        <p>An elevation cross-section between the user's receive point and each transmitter site identifies terrain obstacles. Receiver height above ground level is adjustable.</p>
+      </div>
+      <div class="feature">
+        <h3>Interference Analysis</h3>
+        <p>Overlays multiple stations' coverage areas simultaneously and identifies co-channel and adjacent-channel conflicts — useful for engineers and DXers monitoring reception conditions.</p>
+      </div>
+      <div class="feature">
+        <h3>Sports Affiliates</h3>
+        <p>Station listings include NFL, MLB, NBA and NHL network affiliations. Affiliate maps show the full broadcast footprint for any major league team's radio network.</p>
+      </div>
+      <div class="feature">
+        <h3>HD Radio Subchannels</h3>
+        <p>HD2, HD3 and HD4 subchannel formats and slogans are displayed inline in the station list and on the coverage popup.</p>
+      </div>
+      <div class="feature">
+        <h3>NOAA Weather Radio</h3>
+        <p>All NOAA Weather Radio transmitters are included in the search results with the same terrain-based signal prediction as FM and AM stations.</p>
+      </div>
+      <div class="feature">
+        <h3>Stored Dials</h3>
+        <p>Up to five FM and five AM station sets can be saved by location, with coordinates and station count preserved. PDF export of full dial information is available.</p>
+      </div>
+      <div class="feature">
+        <h3>Search</h3>
+        <p>Search by location, frequency, call sign, sports team affiliation or radio market. Results display in list or map view; map view clusters stations by signal strength.</p>
+      </div>
+    </div>
+
+    <h2>Signal Models</h2>
+
+    <p>The app offers two propagation models selectable from the toolbar. Longley-Rice (labeled L-R) is the default and the industry-standard irregular terrain model developed by the Institute for Telecommunication Sciences. The ML model — internally called JUDY — is a machine-learning approach trained on terrain and propagation data to offer an alternative prediction, particularly for cases where Longley-Rice overestimates coverage in hilly terrain.</p>
+
+    <p>For AM, the app uses the FCC's standard groundwave and skywave methodologies. Day coverage reflects groundwave propagation. Night coverage uses skywave calculations with contours at 25, five and two millivolts per meter — corresponding to strong indoor, marginal indoor and driving reception thresholds. DX mode extends the calculation to long-distance skywave paths.</p>
+
+    <h2>Data Sources</h2>
+
+    <p>Station data is sourced from the FCC License Management System and updated on a rolling basis. The app queries a dedicated back-end API for station records, coverage calculations and sports affiliate lookups. No account or subscription is required. The app is free on both platforms.</p>
+
+    <h2>Developer</h2>
+    <p>RadioLand 2.0 is developed by Nicholas Langan, W2NJL. Feedback and corrections can be submitted through the app's built-in reporting tool.</p>
+
+  </main>
+
+  <section class="gallery-section">
+    <h2>Screenshots</h2>
+    <div class="gallery">
+      <figure>
+        <img src="assets/screenshot-map.png" alt="Map view showing FM stations around New Orleans with signal-strength markers" loading="lazy">
+        <figcaption>Map view — FM stations, New Orleans area</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshot-list.png" alt="List view showing FM stations with HD Radio badges and format chips" loading="lazy">
+        <figcaption>List view with HD subchannel badges</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshot-coverage-fm.png" alt="FM coverage map for 93.1 WZAK Cleveland with contour polygons" loading="lazy">
+        <figcaption>FM coverage map — 93.1 WZAK, Cleveland</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshot-terrain.png" alt="Terrain profile elevation cross-section below coverage map" loading="lazy">
+        <figcaption>Terrain profile view</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshot-coverage-am.png" alt="AM night coverage map for 700 WLW Cincinnati with day/night/DX tabs" loading="lazy">
+        <figcaption>AM night coverage — 700 WLW, Cincinnati</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshot-interference.png" alt="Interference analysis showing WGAR-FM 99.5 Cleveland co-channel overlay" loading="lazy">
+        <figcaption>Interference analysis — 99.5 WGAR-FM</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshot-affiliates.png" alt="Brewers affiliate network map showing AM and FM stations across Wisconsin" loading="lazy">
+        <figcaption>MLB affiliate map — Milwaukee Brewers network</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshot-stored.png" alt="Stored Dials screen showing saved location dial sets" loading="lazy">
+        <figcaption>Stored Dials</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Nicholas Langan, W2NJL &nbsp;·&nbsp;
+      <a href="https://apps.apple.com/us/app/radioland-2-0-radio-near-me/id1597896359">App Store</a> &nbsp;·&nbsp;
+      <a href="https://play.google.com/store/apps/details?id=com.w2njl.radioland&hl=en_US">Google Play</a>
+    </p>
+  </footer>
+
+</body>
+</html>
