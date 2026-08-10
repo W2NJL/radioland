@@ -395,10 +395,192 @@
     footer a { color: var(--dark-t3); }
     footer a:hover { color: var(--dark-t2); text-decoration: none; }
 
+    /* ── Pull quote ── */
+    .pull-quote {
+      border-left: 3px solid var(--red);
+      margin: 24px 0;
+      padding: 4px 0 4px 20px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ── Press cards ── */
+    .press-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 32px 0;
+    }
+    .press-card {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 18px 20px;
+      text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .press-card:hover {
+      border-color: var(--red);
+      box-shadow: 0 2px 12px rgba(190,67,50,0.1);
+      text-decoration: none;
+    }
+    .press-outlet {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .press-hed {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-1);
+      line-height: 1.3;
+    }
+    .press-date {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      color: var(--text-3);
+      margin-top: 2px;
+    }
+
+    /* ── Credits grid ── */
+    .credits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border-lt);
+      border: 1px solid var(--border-lt);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .credits-block {
+      background: var(--card);
+      padding: 22px 20px;
+    }
+    .credits-block h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+    .credits-block dl { display: grid; gap: 12px; }
+    .credits-block dt {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 2px;
+    }
+    .credits-block dd {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      color: var(--text-2);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── Version history ── */
+    .version-list {
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .version-item {
+      border-bottom: 1px solid var(--border-lt);
+      background: var(--card);
+    }
+    .version-item:last-child { border-bottom: none; }
+    .version-item summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    .version-item summary::-webkit-details-marker { display: none; }
+    .version-item summary:hover { background: var(--bg); }
+    .v-badge {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      padding: 3px 9px;
+      border-radius: var(--r-sm);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .v-latest { background: var(--red); }
+    .v-navy   { background: var(--navy); }
+    .v-info { flex: 1; }
+    .v-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-1);
+      display: block;
+    }
+    .v-date {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      color: var(--text-3);
+      display: block;
+    }
+    .v-chevron {
+      font-size: 14px;
+      color: var(--text-3);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .version-item[open] .v-chevron { transform: rotate(180deg); }
+    .v-changes {
+      list-style: none;
+      padding: 0 20px 16px 20px;
+      display: grid;
+      gap: 8px;
+    }
+    .v-changes li {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-2);
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+    }
+    .tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: var(--r-sm);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tag-new      { background: #EFF9F4; color: #3A7D5C; }
+    .tag-improved { background: #EDF0F7; color: #2A3D66; }
+    .tag-fix      { background: #FFF8E8; color: #8A6420; }
+
     /* ── Responsive ── */
     @media (max-width: 700px) {
       .gallery { grid-template-columns: repeat(2, 1fr); }
       .model-row { grid-template-columns: 1fr; }
+      .press-row { grid-template-columns: 1fr; }
+      .credits-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 480px) {
@@ -507,6 +689,166 @@
       </div>
     </div>
   </section>
+
+  <!-- Origins -->
+  <section class="section">
+    <p class="section-kicker">Origins</p>
+    <h2>A graduate thesis that became an app</h2>
+    <p>RadioLand began as a master's thesis in Software Engineering at Villanova University. Langan, a New Jersey native who had been FM DXing for more than 15 years and held an amateur radio license as W2NJL, set out to build what he had always wanted: an accurate, location-based listing of receivable radio stations for any point in North America.</p>
+    <p>The project launched for iOS and Android in February 2022. The thesis earned second place at Villanova's 2022 Three Minute Thesis competition and was covered as a feature article in <em>Radio World</em> in December of that year. The app continues in active development.</p>
+    <blockquote class="pull-quote">"What has been so wonderful about my time at Villanova is not only have my professors helped me find my way, but I've been able to connect all my interests into this ultimate labor of love."</blockquote>
+
+    <div class="press-row">
+      <a class="press-card" href="https://www.radioworld.com/news-and-business/news-makers/explore-the-radioland-app" target="_blank" rel="noopener">
+        <span class="press-outlet">Radio World</span>
+        <span class="press-hed">Explore the RadioLand App</span>
+        <span class="press-date">Dec. 5, 2022</span>
+      </a>
+      <a class="press-card" href="https://www.villanova.edu/vu/magazine/spring-2023/features/on-air-with-wxvu/nick-langan-making-waves.html" target="_blank" rel="noopener">
+        <span class="press-outlet">Villanova Magazine</span>
+        <span class="press-hed">Nick Langan: Making Waves</span>
+        <span class="press-date">Spring 2023</span>
+      </a>
+    </div>
+
+    <div class="credits-grid">
+      <div class="credits-block">
+        <h3>Author</h3>
+        <dl>
+          <dt>Nick Langan, W2NJL</dt>
+          <dd>M.S. Software Engineering, Villanova University</dd>
+          <dt>Kristin Obermyer, M.S.</dt>
+          <dd>Thesis Advisor, Villanova Dept. of Computing Sciences</dd>
+        </dl>
+      </div>
+      <div class="credits-block">
+        <h3>Acknowledgements</h3>
+        <dl>
+          <dt>Mark Colombo</dt>
+          <dd>RabbitEars.info — suggested applying FCC Longley-Rice data, the insight that made the project possible</dd>
+          <dt>Bryce Foster</dt>
+          <dd>Designed elevation point generation between user and transmitter; expert technical guidance throughout development</dd>
+          <dt>Sam Rizzo</dt>
+          <dd>Named "RadioLand" during Ms. Obermyer's Software Engineering class</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- Version History -->
+  <section class="section">
+    <p class="section-kicker">Release History</p>
+    <h2>What's new</h2>
+    <div class="version-list">
+
+      <details class="version-item" open>
+        <summary>
+          <span class="v-badge v-latest">v2.0.1</span>
+          <span class="v-info">
+            <span class="v-title">Bug Fixes &amp; Stability</span>
+            <span class="v-date">Aug. 2026</span>
+          </span>
+          <span class="v-chevron">▾</span>
+        </summary>
+        <ul class="v-changes">
+          <li><span class="tag tag-fix">fix</span> Crash on launch for users without cached fonts</li>
+          <li><span class="tag tag-fix">fix</span> Crash when tapping VIEW on stored dial notification</li>
+          <li><span class="tag tag-fix">fix</span> App hang when loading station coverage maps</li>
+          <li><span class="tag tag-fix">fix</span> Dead space below bottom navigation bar removed</li>
+        </ul>
+      </details>
+
+      <details class="version-item">
+        <summary>
+          <span class="v-badge v-navy">v2.0</span>
+          <span class="v-info">
+            <span class="v-title">AM, Weather Radio &amp; JUDY Model</span>
+            <span class="v-date">Aug. 2026</span>
+          </span>
+          <span class="v-chevron">▾</span>
+        </summary>
+        <ul class="v-changes">
+          <li><span class="tag tag-new">new</span> AM radio station coverage with day and night propagation</li>
+          <li><span class="tag tag-new">new</span> NOAA Weather Radio station support</li>
+          <li><span class="tag tag-new">new</span> JUDY advanced propagation model for DX enthusiasts</li>
+          <li><span class="tag tag-new">new</span> Redesigned station card with three-tier badge system</li>
+          <li><span class="tag tag-improved">improved</span> Coverage map rendering with anti-aliasing</li>
+          <li><span class="tag tag-improved">improved</span> RadioDNS station logo support for FM stations</li>
+          <li><span class="tag tag-improved">improved</span> Dark mode refinements and new color system</li>
+        </ul>
+      </details>
+
+      <details class="version-item">
+        <summary>
+          <span class="v-badge v-navy">v1.10</span>
+          <span class="v-info">
+            <span class="v-title">HD Radio Subchannels &amp; Daily Changes</span>
+            <span class="v-date">Sep. 2024</span>
+          </span>
+          <span class="v-chevron">▾</span>
+        </summary>
+        <ul class="v-changes">
+          <li><span class="tag tag-new">new</span> HD Radio subchannel format and slogan data (HD2/HD3/HD4)</li>
+          <li><span class="tag tag-new">new</span> Daily changes screen with programming and technical diffs</li>
+          <li><span class="tag tag-improved">improved</span> Callsign search with flexible matching</li>
+        </ul>
+      </details>
+
+      <details class="version-item">
+        <summary>
+          <span class="v-badge v-navy">v1.9</span>
+          <span class="v-info">
+            <span class="v-title">Interference Analysis</span>
+            <span class="v-date">Mar. 2024</span>
+          </span>
+          <span class="v-chevron">▾</span>
+        </summary>
+        <ul class="v-changes">
+          <li><span class="tag tag-new">new</span> Interference analysis with IBOC and same-channel detection</li>
+          <li><span class="tag tag-improved">improved</span> Station popup redesign with interference flags</li>
+        </ul>
+      </details>
+
+      <details class="version-item">
+        <summary>
+          <span class="v-badge v-navy">v1.8</span>
+          <span class="v-info">
+            <span class="v-title">Coverage Maps &amp; Map View</span>
+            <span class="v-date">Oct. 2023</span>
+          </span>
+          <span class="v-chevron">▾</span>
+        </summary>
+        <ul class="v-changes">
+          <li><span class="tag tag-new">new</span> Full-screen Longley-Rice coverage map overlays</li>
+          <li><span class="tag tag-new">new</span> Multi-station coverage map generator (up to 10 stations)</li>
+          <li><span class="tag tag-improved">improved</span> Map view with clustered station markers</li>
+        </ul>
+      </details>
+
+      <details class="version-item">
+        <summary>
+          <span class="v-badge v-navy">v1.0</span>
+          <span class="v-info">
+            <span class="v-title">Initial Release — FM Station Discovery</span>
+            <span class="v-date">Feb. 2022</span>
+          </span>
+          <span class="v-chevron">▾</span>
+        </summary>
+        <ul class="v-changes">
+          <li><span class="tag tag-new">new</span> FM station discovery with Longley-Rice signal prediction</li>
+          <li><span class="tag tag-new">new</span> List and map view with signal strength markers</li>
+          <li><span class="tag tag-new">new</span> MLB and NFL broadcast affiliate listings</li>
+          <li><span class="tag tag-new">new</span> Shareable PDF dial reports</li>
+          <li><span class="tag tag-new">new</span> Nielsen market search</li>
+        </ul>
+      </details>
+
+    </div>
+  </section>
+
+  <hr class="rule">
 
   <!-- Screenshots -->
   <section class="gallery-section">
